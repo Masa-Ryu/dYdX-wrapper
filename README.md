@@ -6,3 +6,6 @@ https://docs.dydx.exchange/?python
 
 dYdX official  
 https://trade.dydx.exchange/
+
+official github  
+https://github.com/dydxprotocol/dydx-v3-python
