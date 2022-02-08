@@ -79,9 +79,9 @@ class DydxMethod:
         if type_ == 'market':
             price = None
         if price is not None:
-            params['price'] = str(price)
+            params['price'] = str(round(price))
         if trigger_price is not None:
-            params['triggerPrice'] = str(trigger_price)
+            params['trigger_price'] = str(round(trigger_price))
         if time_in_force is not None:
             params['time_in_force'] = time_in_force
         order = self.a(self.client.private.create_order(**params))
