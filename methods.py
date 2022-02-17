@@ -61,7 +61,7 @@ class DydxMethod:
         return float(orderbook['markets'][market]['indexPrice'])
 
     def place_order(
-            self, market, side, type_, size, expiration, price=None,
+            self, market, side, type_, size, expiration, price,
             post_only=False, limit_fee=0.005, time_in_force=None,
             trigger_price=None
             ):
@@ -72,14 +72,11 @@ class DydxMethod:
                 'side': side,  # buy or sell
                 'order_type': type_,  # limit or market
                 'size': str(size),
+                'price': str(price),
                 'post_only': post_only,
                 'limit_fee': limit_fee,
                 'expiration_epoch_seconds': expiration,
                 }
-        if type_ == 'market':
-            price = None
-        if price is not None:
-            params['price'] = str(price)
         if trigger_price is not None:
             params['trigger_price'] = str(trigger_price)
         if time_in_force is not None:
@@ -97,3 +94,13 @@ class DydxMethod:
     def register_api_key(self):
         api_key_response = self.client.eth_private.create_api_key()
         print(api_key_response.data)
+
+    def get_orders(self):
+        all_orders = self.client.private.get_orders(
+                market=MARKET_BTC_USD,
+                status=ORDER_STATUS_OPEN,
+                side=ORDER_SIDE_SELL,
+                # type=ORDER_TYPE_LIMIT,
+                limit=50,
+                )
+        print(all_orders.data)
