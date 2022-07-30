@@ -63,7 +63,7 @@ class DydxMethod:
     def place_order(
             self, market, side, type_, size, expiration, price,
             post_only=False, limit_fee=0.005, time_in_force=None,
-            trigger_price=None
+            trigger_price=None, reduce_only=False
             ):
         account_response = self.client.private.get_account()
         params = {
@@ -81,6 +81,9 @@ class DydxMethod:
             params['trigger_price'] = str(trigger_price)
         if time_in_force is not None:
             params['time_in_force'] = time_in_force
+        if not reduce_only:
+            params['reduceOnly'] = reduce_only
+            params['time_in_force'] = TIME_IN_FORCE_FOK
         order = self.a(self.client.private.create_order(**params))
         return order['order']
 
