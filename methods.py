@@ -81,8 +81,8 @@ class DydxMethod:
             params['trigger_price'] = str(trigger_price)
         if time_in_force is not None:
             params['time_in_force'] = time_in_force
-        if not reduce_only:
-            params['reduceOnly'] = reduce_only
+        if reduce_only:
+            params['reduce-only'] = True
             params['time_in_force'] = TIME_IN_FORCE_FOK
         order = self.a(self.client.private.create_order(**params))
         return order['order']
