@@ -82,7 +82,7 @@ class DydxMethod:
         if time_in_force is not None:
             params['time_in_force'] = time_in_force
         if reduce_only:
-            params['reduce-only'] = True
+            params['reduce_only'] = True
             params['time_in_force'] = TIME_IN_FORCE_FOK
         order = self.a(self.client.private.create_order(**params))
         return order['order']
