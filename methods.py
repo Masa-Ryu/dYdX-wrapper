@@ -107,3 +107,6 @@ class DydxMethod:
                 limit=50,
                 )
         print(all_orders.data)
+
+    def get_rewards(self):
+        return self.a(self.client.private.get_trading_rewards())
